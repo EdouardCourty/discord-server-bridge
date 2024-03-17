@@ -5,6 +5,9 @@
 This project can be used as a template for future Discord bots.<br />
 To start fresh, simply delete the content of the `src/CommandHandler` & `src/EventHandler` folders and implement your own logic.
 
+I'm using PM2 as my deployment tool and ESLint as my linter.<br />
+Both config files can be found in the root directory of the project (`ecosystem.config.cjs` & `.eslintrc.json`)
+
 ### Features
 
 This bot aims to connect multiple Discord servers together using a dedicated channel in each server.
