@@ -26,7 +26,7 @@ export default class {
         for (const commandFile of commandFiles) {
             const commandModule = (await import('../CommandHandler/' + commandFile)).default;
             /** @type DiscordCommandHandler */
-            const command = new commandModule();
+            const command = new commandModule(client);
 
             this.#commandMap.set(command.getName(), command);
         }

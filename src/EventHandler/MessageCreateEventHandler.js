@@ -29,10 +29,14 @@ export default class extends DiscordEventHandler {
             channels.forEach((channel) => {
                 if (channel.id !== channelId) {
                     channel.send({
-                        'content': '**' + message.author.globalName + ' [' + message.guild.name + ']** : ' + message.content
+                        'content': '**<@' + message.author.id + '> [' + message.guild.name + ']** : ' + this.#prepareMessageContent(message.content)
                     }).catch();
                 }
             });
         }
+    }
+
+    #prepareMessageContent(content) {
+        return content.replace('@everyone', 'everyone').replace('@here', 'here');
     }
 }
