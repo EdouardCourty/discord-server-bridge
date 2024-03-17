@@ -1,0 +1,30 @@
+{
+  "name": "discord-server-bridge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdouardCourty/discord-server-bridge.git"
+  },
+  "author": {
+    "name": "Edouard Courty",
+    "url": "https://github.com/EdouardCourty"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EdouardCourty/discord-server-bridge/issues"
+  },
+  "homepage": "https://github.com/EdouardCourty/discord-server-bridge#readme",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  }
+}

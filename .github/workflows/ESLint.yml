@@ -1,0 +1,30 @@
+name: 'ESLint'
+
+on:
+  push:
+    branches: ['master']
+  pull_request:
+    branches: ['*']
+
+jobs:
+  eslint:
+    name: 'ESLint'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+
+      - name: 'Setup Node'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 'Installs dependencies'
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install --dev
+
+      - name: 'Run ESLint'
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: eslint src
