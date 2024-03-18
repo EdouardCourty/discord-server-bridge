@@ -13,14 +13,16 @@ export default class extends DiscordCommandHandler {
     async handle(interaction) {
         if (false === interaction.memberPermissions.has(PermissionFlagsBits.Administrator)) {
             return interaction.reply({
-                content: 'You cannot execute this command.'
+                content: 'You cannot execute this command.',
+                ephemeral: true
             });
         }
 
         ChannelStore.addChannel(interaction.channel);
 
         await interaction.reply({
-            content: 'This channel was successfully added to the multi-server bridge. Have fun!'
+            content: 'This channel was successfully added to the multi-server bridge. Have fun!',
+            ephemeral: true
         });
     }
 }

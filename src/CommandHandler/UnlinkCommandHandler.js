@@ -9,19 +9,20 @@ export default class extends DiscordCommandHandler {
 
     /**
      * @param {CommandInteraction} interaction
-     * @returns {Promise<void>}
      */
     async handle(interaction) {
         if (false === interaction.memberPermissions.has(PermissionFlagsBits.Administrator)) {
             return interaction.reply({
-                content: 'You cannot execute this command.'
+                content: 'You cannot execute this command.',
+                ephemeral: true
             });
         }
 
         ChannelStore.removeChannel(interaction.channel.id);
 
         await interaction.reply({
-            content: 'This channel was removed from the multi-server bridge.'
+            content: 'This channel was removed from the multi-server bridge.',
+            ephemeral: true
         });
     }
 }

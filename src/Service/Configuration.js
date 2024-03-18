@@ -15,6 +15,21 @@ export default class {
         return this.#configuration;
     }
 
+    static getChannelIds() {
+        return Object.keys(this.getConfiguration()['channels'] ?? {});
+    }
+
+    static getChannelConfiguration(channelId) {
+        return this.getConfiguration()['channels'][channelId];
+    }
+
+    static updateChannelConfiguration(channelId, configuration) {
+        const newConfig = this.getConfiguration();
+        newConfig['channels'][channelId] = configuration;
+
+        this.updateConfiguration(newConfig);
+    }
+
     static updateConfiguration(configObject) {
         this.#configuration = configObject;
 

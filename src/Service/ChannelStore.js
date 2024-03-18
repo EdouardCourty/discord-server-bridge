@@ -9,12 +9,10 @@ export default class {
     static async init(client) {
         this.#channelMap = new Map();
 
-        const channelIds = Configuration.getConfiguration()['channels'] ?? [];
-
-        for (const channelData of channelIds) {
-            const channel = await client.channels.fetch(channelData['id']).catch();
+        for (const channelId of Configuration.getChannelIds()) {
+            const channel = await client.channels.fetch(channelId).catch();
             Logger.info('Found channel: ' + channel.name + ' on ' + channel.guild.name);
-            this.#channelMap.set(channelData['id'], channel);
+            this.#channelMap.set(channelId, channel);
         }
     }
 
@@ -22,18 +20,18 @@ export default class {
      * @param {TextChannel} channel
      */
     static addChannel(channel) {
-        const config = Configuration.getConfiguration();
-        const newChannels = config['channels'].filter((channelData) => channelData['id'] !== channel.id);
-
-        newChannels.push({
-            id: channel.id,
-            guild_id: channel.guild.id
-        });
-        config['channels'] = newChannels;
-
-        Configuration.updateConfiguration(config);
+        const channelConfiguration = this.getDefaultChannelConfiguration(channel);
+        Configuration.updateChannelConfiguration(channel.id, channelConfiguration);
 
         this.#channelMap.set(channel.id, channel);
+    }
+
+    static getDefaultChannelConfiguration(channel) {
+        return {
+            'guild_id': channel.guild.id,
+            'allow_mentions': false,
+            'allow_files': false
+        };
     }
 
     /**
@@ -41,7 +39,7 @@ export default class {
      */
     static removeChannel(channelId) {
         const config = Configuration.getConfiguration();
-        config['channels'] = config['channels'].filter((channelData) => channelData['id'] !== channelId);
+        delete config['channels'][channelId];
 
         Configuration.updateConfiguration(config);
 
@@ -54,9 +52,9 @@ export default class {
     static removeChannelByGuild(guild) {
         const config = Configuration.getConfiguration();
 
-        config['channels'].forEach((channelData) => {
-            if (channelData['guild_id'] === guild.id) {
-                this.removeChannel(channelData['id']);
+        Object.entries(config['channels']).forEach(([channelId, configData]) => {
+            if (configData['guild_id'] === guild.id) {
+                this.removeChannel(channelId);
             }
         });
     }
