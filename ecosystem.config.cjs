@@ -15,6 +15,7 @@ module.exports = {
         production: {
             'user': 'edouard',
             'host': process.env.PM2_DEPLOY_IP,
+            'port': process.env.PM2_DEPLOY_PORT,
             'ref': 'origin/master',
             'repo': 'git@github.com:EdouardCourty/discord-server-bridge',
             'path': '/var/www/discord-server-bridge',
