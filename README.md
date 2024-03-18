@@ -20,5 +20,10 @@ The `@everyone` and `@here` mentions are not forwarded in the bridge channels, t
 - `link` - Links the current channel to the multi-server bridge
 - `unlink` - Removes the current channel from the multi-server bridge
 - `list` - Show a list of all the currently connected servers & channels
+- `stats` - Shows the bot's statistics (Uptime, ping, linked servers)
+
+### Contributing
+
+Please submit any PR you want to this project. Make sure ESLint is passing.
 
 &copy; Edouard Courty - 2024
