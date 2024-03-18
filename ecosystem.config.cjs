@@ -13,7 +13,7 @@ module.exports = {
     },
     deploy: {
         production: {
-            'user': 'edouard',
+            'user': process.env.PM2_DEPLOY_USER,
             'host': process.env.PM2_DEPLOY_IP,
             'port': process.env.PM2_DEPLOY_PORT,
             'ref': 'origin/master',
