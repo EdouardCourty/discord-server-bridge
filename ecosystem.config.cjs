@@ -19,7 +19,7 @@ module.exports = {
             'ref': 'origin/master',
             'repo': 'git@github.com:EdouardCourty/discord-server-bridge',
             'path': '/var/www/discord-server-bridge',
-            'post-deploy': 'yarn install && cp /var/www/discord-server-bridge/.env /var/www/discord-server-bridge/current/.env && pm2 startOrRestart ecosystem.config.cjs --env production'
+            'post-deploy': 'yarn install && cp /var/www/discord-server-bridge/.env /var/www/discord-server-bridge/current/.env && ln -S /var/www/discord-server-bridge/configuration.json /var/www/discord-server-bridge/current/data/configuration.json && pm2 startOrRestart ecosystem.config.cjs --env production'
         }
     }
 }
