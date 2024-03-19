@@ -20,11 +20,9 @@ export default class extends DiscordCommandHandler {
             };
         });
 
-        let hasChannels = true;
+        const hasChannels = channelGuildsList.length !== 0;
 
-        if (channelGuildsList.length === 0) {
-            hasChannels = false;
-
+        if (false === hasChannels) {
             channelGuildsList.push({
                 name: 'There are currently no channels in the multi-server bridge.',
                 value: 'Please use the /link command in the channels you wish to link.'
