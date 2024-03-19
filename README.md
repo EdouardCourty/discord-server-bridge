@@ -15,12 +15,24 @@ Whenever a message is sent in one of those server, it will be replicated to the 
 
 The `@everyone` and `@here` mentions are not forwarded in the bridge channels, to avoid spamming.
 
+Message replies are handled, threads are not.<br />
+
+**Settings**<br />
+File & Image upload can be regulated using the configuration. By default, a newly linked bridge channel will not receive images or files from the bridge. <br />
+User mentions are also blocked by default.<br />
+<br />
+These settings can be changed using the `configure edit` command which will allow an administrator to allow file & image reception, as well as user mentions.
+
+**Security**<br />
+The `link`, `unlink` and `configure edit` command can only be used by server administrators.
+
 ### Commands
 
 - `link` - Links the current channel to the multi-server bridge
 - `unlink` - Removes the current channel from the multi-server bridge
 - `list` - Show a list of all the currently connected servers & channels
 - `stats` - Shows the bot's statistics (Uptime, ping, linked servers)
+- `configure <edit|show>` - Edits or shows the current bridge channel configuration
 
 ### Contributing
 
