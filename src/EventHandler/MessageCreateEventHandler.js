@@ -42,15 +42,27 @@ export default class extends DiscordEventHandler {
 
         let stringContent = '';
 
-        if (message.type === MessageType.Reply) {
-            console.log(1)
+        if (typeof message !== 'string' && message.type === MessageType.Reply) {
+            /** @type Message */
             const originMessage = await message.channel.messages.fetch(message.reference.messageId);
 
-            stringContent += '> ' + (await this.#prepareMessagePayload(channel, originMessage)).content + '\n';
+            let originMessageContent = originMessage.author.bot
+                ? originMessage.content.split('\n').pop()
+                : originMessage;
+
+            stringContent += `> ${(await this.#prepareMessagePayload(channel, originMessageContent)).content}\n`;
+        }
+
+        if (typeof message !== 'string') {
+            stringContent += message.author.bot
+                ? this.#prepareMessageContent(message, channelConfig['allow_mentions'])
+                : '**' + message.author.globalName + ' [' + message.guild.name + ']** : ' + this.#prepareMessageContent(message, channelConfig['allow_mentions'])
+        } else {
+            stringContent = message;
         }
 
         const payload = {
-            content: stringContent + '**' + message.author.globalName + ' [' + message.guild.name + ']** : ' + this.#prepareMessageContent(message, channelConfig['allow_mentions'])
+            content: stringContent
         };
 
         if (channelConfig['allow_files']) {
