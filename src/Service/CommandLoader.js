@@ -1,5 +1,5 @@
 import fs from "fs";
-import { REST, SlashCommandBuilder, Client, Guild } from "discord.js";
+import { REST, SlashCommandBuilder, Client, Guild, SlashCommandSubcommandBuilder } from "discord.js";
 import { Routes } from "discord-api-types/v9";
 import DiscordEventHandler from "../lib/DiscordEventHandler.js";
 import DiscordCommandHandler from "../lib/DiscordCommandHandler.js";
@@ -27,6 +27,7 @@ export default class {
             const commandModule = (await import('../CommandHandler/' + commandFile)).default;
             /** @type DiscordCommandHandler */
             const command = new commandModule(client);
+            command.configure();
 
             this.#commandMap.set(command.getName(), command);
         }
@@ -82,10 +83,19 @@ export default class {
         }).setToken(process.env.TOKEN);
 
         const commands = this.getCommands().map((commandHandler) => {
-            return new SlashCommandBuilder()
+            const commandBuilder = new SlashCommandBuilder()
                 .setName(commandHandler.getName())
-                .setDescription(commandHandler.getDescription())
-                .toJSON();
+                .setDescription(commandHandler.getDescription());
+
+            commandHandler.getSubCommands().forEach((subCommand) => {
+                const subCommandBuilder = new SlashCommandSubcommandBuilder()
+                    .setName(subCommand.name)
+                    .setDescription(subCommand.description);
+
+                commandBuilder.addSubcommand(subCommandBuilder);
+            });
+
+            return commandBuilder.toJSON();
         });
 
         rest.put(Routes.applicationGuildCommands(this.#client.user.id, guild.id), {

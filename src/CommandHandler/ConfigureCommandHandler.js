@@ -1,7 +1,7 @@
 import DiscordCommandHandler from "../lib/DiscordCommandHandler.js";
 import {
     ActionRowBuilder,
-    CommandInteraction,
+    CommandInteraction, ModalBuilder,
     PermissionFlagsBits,
     StringSelectMenuBuilder,
     StringSelectMenuOptionBuilder
@@ -13,10 +13,32 @@ export default class extends DiscordCommandHandler {
         super(client, 'configure', 'Opens the configuration menu for the current bridge channel.');
     }
 
+    configure() {
+        this
+            .addSubCommand('show', 'Shows the bridge channel configuration.')
+            .addSubCommand('edit', 'Edits the bridge channel configuration.');
+    }
+
     /**
      * @param {CommandInteraction} interaction
      */
     async handle(interaction) {
+        const subCommand = interaction.options.getSubcommand();
+
+        switch (subCommand) {
+            case 'edit':
+                return this.#handleEditSubCommand(interaction);
+            case 'show':
+                return this.#handleShowSubCommand(interaction);
+            default:
+                break;
+        }
+    }
+
+    /**
+     * @param {CommandInteraction} interaction
+     */
+    async #handleEditSubCommand(interaction) {
         if (false === interaction.memberPermissions.has(PermissionFlagsBits.Administrator)) {
             return interaction.reply({
                 content: 'You cannot execute this command.',
@@ -54,7 +76,9 @@ export default class extends DiscordCommandHandler {
             ]);
 
         const actionRowBuilder = new ActionRowBuilder().addComponents(menu);
+
         const interactionResponse = await interaction.reply({
+            content: 'Please use the following dropdown to change the channel configuration.',
             components: [actionRowBuilder],
             ephemeral: true
         });
@@ -83,5 +107,35 @@ export default class extends DiscordCommandHandler {
                 components: []
             });
         }
+    }
+
+    /**
+     * @param {CommandInteraction} interaction
+     */
+    async #handleShowSubCommand(interaction) {
+        const channelConfiguration = Configuration.getChannelConfiguration(interaction.channel.id);
+
+        return interaction.reply({
+            ephemeral: true,
+            embeds: [{
+                title: ':link: Bridge channel configuration',
+                description: 'Use the `/configure edit` command to modify the configuration.',
+                color: 0x8a01d9,
+                fields: [
+                    {
+                        name: 'Files & images reception',
+                        value: channelConfiguration['allow_files']
+                            ? ':white_check_mark: Allowed'
+                            : ':no_entry: Disallowed' },
+                    {
+                        name: 'User mentions',
+                        value: channelConfiguration['allow_mentions']
+                            ? ':white_check_mark: Allowed'
+                            : ':no_entry: Disallowed'
+                    }
+                ],
+                timestamp: new Date()
+            }]
+        })
     }
 }

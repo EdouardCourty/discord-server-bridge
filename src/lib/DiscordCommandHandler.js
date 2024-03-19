@@ -4,11 +4,18 @@ export default class {
     #client;
     #name;
     #description;
+    /**
+     * @type {{name: string, description: string}[]}
+     */
+    #subcommands = [];
 
     constructor(client, name, description) {
         this.#client = client;
         this.#name = name;
         this.#description = description;
+    }
+
+    configure() {
     }
 
     /**
@@ -24,6 +31,18 @@ export default class {
 
     getDescription() {
         return this.#description;
+    }
+
+    addSubCommand(name, description) {
+        this.#subcommands.push({
+            name, description
+        });
+
+        return this;
+    }
+
+    getSubCommands() {
+        return this.#subcommands;
     }
 
     /**
