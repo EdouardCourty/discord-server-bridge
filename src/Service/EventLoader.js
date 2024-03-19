@@ -1,4 +1,5 @@
 import fs from "fs";
+
 import DiscordEventHandler from "../lib/DiscordEventHandler.js";
 
 export default class {

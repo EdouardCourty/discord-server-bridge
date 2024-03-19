@@ -1,11 +1,12 @@
-import DiscordCommandHandler from "../lib/DiscordCommandHandler.js";
 import {
     ActionRowBuilder,
-    CommandInteraction, ModalBuilder,
+    CommandInteraction,
     PermissionFlagsBits,
     StringSelectMenuBuilder,
     StringSelectMenuOptionBuilder
 } from "discord.js";
+
+import DiscordCommandHandler from "../lib/DiscordCommandHandler.js";
 import Configuration from "../Service/Configuration.js";
 
 export default class extends DiscordCommandHandler {

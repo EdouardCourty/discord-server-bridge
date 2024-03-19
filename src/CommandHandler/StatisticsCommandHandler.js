@@ -1,5 +1,6 @@
-import DiscordCommandHandler from "../lib/DiscordCommandHandler.js";
 import {Colors, CommandInteraction} from "discord.js";
+
+import DiscordCommandHandler from "../lib/DiscordCommandHandler.js";
 import ChannelStore from "../Service/ChannelStore.js";
 
 export default class extends DiscordCommandHandler {

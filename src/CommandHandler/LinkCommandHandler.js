@@ -1,5 +1,6 @@
+import { CommandInteraction, PermissionFlagsBits } from "discord.js";
+
 import DiscordCommandHandler from "../lib/DiscordCommandHandler.js";
-import {CommandInteraction, PermissionFlagsBits} from "discord.js";
 import ChannelStore from "../Service/ChannelStore.js";
 
 export default class extends DiscordCommandHandler {

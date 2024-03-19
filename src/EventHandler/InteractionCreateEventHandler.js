@@ -1,5 +1,6 @@
+import { CommandInteraction } from "discord.js";
+
 import DiscordEventHandler from "../lib/DiscordEventHandler.js";
-import {CommandInteraction} from "discord.js";
 import CommandLoader from "../Service/CommandLoader.js";
 import Logger from "../Service/Logger.js";
 

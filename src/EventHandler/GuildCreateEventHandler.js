@@ -1,5 +1,6 @@
+import { Guild } from "discord.js";
+
 import DiscordEventHandler from "../lib/DiscordEventHandler.js";
-import {Guild} from "discord.js";
 import CommandLoader from "../Service/CommandLoader.js";
 
 export default class extends DiscordEventHandler {

@@ -1,5 +1,6 @@
+import { Guild } from "discord.js";
+
 import DiscordEventHandler from "../lib/DiscordEventHandler.js";
-import {Guild} from "discord.js";
 import ChannelStore from "../Service/ChannelStore.js";
 
 export default class extends DiscordEventHandler {

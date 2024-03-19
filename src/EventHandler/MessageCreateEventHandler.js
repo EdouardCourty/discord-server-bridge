@@ -1,5 +1,6 @@
+import { Message, MessageType } from "discord.js";
+
 import DiscordEventHandler from "../lib/DiscordEventHandler.js";
-import {Message, MessageType, MessageFlagsBitField} from "discord.js";
 import ChannelStore from "../Service/ChannelStore.js";
 import Configuration from "../Service/Configuration.js";
 

@@ -1,5 +1,6 @@
+import { TextChannel, Guild } from "discord.js";
+
 import Configuration from "./Configuration.js";
-import {TextChannel, Guild} from "discord.js";
 import Logger from "./Logger.js";
 
 export default class {

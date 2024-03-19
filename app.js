@@ -1,5 +1,6 @@
-import {Client, GatewayIntentBits} from "discord.js";
+import { Client, GatewayIntentBits } from "discord.js";
 import dotenv from "dotenv";
+
 import EventLoader from "./src/Service/EventLoader.js";
 import CommandLoader from "./src/Service/CommandLoader.js";
 import Logger from "./src/Service/Logger.js";

@@ -1,6 +1,8 @@
-import fs from "fs";
-import { REST, SlashCommandBuilder, Client, Guild, SlashCommandSubcommandBuilder } from "discord.js";
 import { Routes } from "discord-api-types/v9";
+import { REST, SlashCommandBuilder, Client, Guild, SlashCommandSubcommandBuilder } from "discord.js";
+
+import fs from "fs";
+
 import DiscordEventHandler from "../lib/DiscordEventHandler.js";
 import DiscordCommandHandler from "../lib/DiscordCommandHandler.js";
 import Logger from "./Logger.js";
