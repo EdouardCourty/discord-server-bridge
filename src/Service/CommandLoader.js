@@ -1,4 +1,4 @@
-import { Routes } from "discord-api-types/v9";
+import { Routes } from "discord-api-types/v10";
 import { REST, SlashCommandBuilder, Client, Guild, SlashCommandSubcommandBuilder } from "discord.js";
 
 import fs from "fs";
@@ -81,7 +81,7 @@ export default class {
      */
     static async deployCommandOnGuild(guild) {
         const rest= new REST({
-            version: '9'
+            version: '10'
         }).setToken(process.env.TOKEN);
 
         const commands = this.getCommands().map((commandHandler) => {
