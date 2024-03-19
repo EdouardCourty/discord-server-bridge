@@ -99,8 +99,7 @@ export default class extends DiscordCommandHandler {
 
             await interaction.editReply({
                 content: 'The configuration has been updated.',
-                components: [],
-                ephemeral: true
+                components: []
             });
         } catch (e) {
             await interaction.editReply({
